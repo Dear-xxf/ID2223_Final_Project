@@ -29,6 +29,12 @@ DHS_INDICATORS = [
         'total_children_in_shelter'
     ]
 
+project = hopsworks.login(
+        project=HOPSWORKS_PROJECT,
+        api_key_value=API_KEY
+    )
+fs = project.get_feature_store()
+
 
 def fetch_latest_data(date_str: str) -> pd.DataFrame:
     try:
@@ -58,10 +64,7 @@ def to_utc(dt):
     return dt.tz_convert('UTC')
 
 def run_daily_update_and_prediction():
-    project = hopsworks.login(project=HOPSWORKS_PROJECT, api_key_value=API_KEY)
-    fs = project.get_feature_store()
-
-    today = datetime.now().strftime('%Y-%m-%d')
+    today = (datetime.now()- timedelta(days=1)).strftime('%Y-%m-%d')
     today_date = datetime.strptime(today, '%Y-%m-%d') - timedelta(hours=12)
     print(f"当前任务日期 (T日): {today}")
 
@@ -136,8 +139,7 @@ def run_daily_update_and_prediction():
 
 
     feature_group.insert(
-        df_combined_new,
-        write_options={"wait_for_job": True},
+        df_combined_new
     )
     return df_combined_new
 
@@ -153,7 +155,19 @@ def predict_children_in_shelter(df: pd.DataFrame):
     prediction = model.predict(X_new)
     df['predicted_children_in_shelter'] = int(round(prediction[0]))
     print("预测结果:")
-    print(df[['date_of_census', 'predicted_children_in_shelter']])
+    print(df[['date_of_census', 'total_children_in_shelter']])
+    print(df['predicted_children_in_shelter'])
+
+    feature_group = fs.get_feature_group(
+        name="dhs_shelter_children_predictions",
+        version=1
+    )
+
+    feature_group.insert(
+        df[['date_of_census', 'predicted_children_in_shelter', 'total_children_in_shelter']],
+        write_options={"wait_for_job": True}
+    )
+
     return df
 
 
@@ -161,3 +175,18 @@ if __name__ == '__main__':
     df = run_daily_update_and_prediction()
     if not df.empty:
         df_with_predictions = predict_children_in_shelter(df)
+
+    # data = {
+    #     'date_of_census': [pd.to_datetime('2025-12-27 00:00:00+00:00')],
+    #     'predicted_children_in_shelter': [30692],
+    #     'total_children_in_shelter': [30685]
+    # }
+    # manual_df = pd.DataFrame(data)
+    # feature_group = fs.get_feature_group(
+    #     name="dhs_shelter_children_predictions",
+    #     version=1
+    # )
+    # feature_group.insert(
+    #     manual_df,
+    #     write_options={"wait_for_job": True}
+    # )
