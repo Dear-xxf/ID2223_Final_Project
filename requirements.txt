@@ -1,0 +1,10 @@
+gradio==6.2.0
+hopsworks==4.2.10
+joblib==1.5.1
+numpy==2.4.0
+pandas==2.3.3
+plotly==6.5.0
+pytz==2025.2
+scikit_learn==1.8.0
+sodapy==2.2.0
+xgboost==3.1.2
