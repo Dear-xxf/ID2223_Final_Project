@@ -28,4 +28,4 @@ jobs:
         env:
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
         run: |
-          python update_data.py
+          python ./src/update_data.py
