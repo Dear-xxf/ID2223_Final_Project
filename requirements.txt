@@ -8,3 +8,4 @@ scikit_learn==1.7.2
 sodapy==2.2.0
 xgboost==3.1.2
 dotenv==0.9.9
+pyarrow
