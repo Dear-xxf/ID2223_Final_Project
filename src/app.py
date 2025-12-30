@@ -5,9 +5,12 @@ from datetime import datetime
 import time
 import hopsworks
 import os
+from dotenv import load_dotenv
+
+load_dotenv("../.env")
 
 HOPSWORKS_PROJECT = "ID2223_finn"
-API_KEY = os.environ.get("HOPSWORKS_API_KEY")
+API_KEY = os.getenv("HOPSWORKS_API_KEY")
 
 project = hopsworks.login(
         project=HOPSWORKS_PROJECT,

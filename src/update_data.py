@@ -9,9 +9,12 @@ from data_processing import create_combined_features
 from sodapy import Socrata
 import pytz
 import os
+from dotenv import load_dotenv
+
+load_dotenv("../.env")
 
 HOPSWORKS_PROJECT = "ID2223_finn"
-API_KEY = os.environ.get("HOPSWORKS_API_KEY")
+API_KEY = os.getenv("HOPSWORKS_API_KEY")
 
 # Hopsworks Feature Group & Model Info
 FEATURE_GROUP_NAME = 'dhs_shelter_children_features'
@@ -30,10 +33,11 @@ DHS_INDICATORS = [
         'total_children_in_shelter'
     ]
 
-project = hopsworks.login(
-        project=HOPSWORKS_PROJECT,
-        api_key_value=API_KEY
-    )
+# project = hopsworks.login(
+#         project=HOPSWORKS_PROJECT,
+#         api_key_value=API_KEY
+#     )
+project = hopsworks.login(engine="python")
 fs = project.get_feature_store()
 
 
@@ -65,7 +69,8 @@ def to_utc(dt):
     return dt.tz_convert('UTC')
 
 def run_daily_update_and_prediction():
-    today = (datetime.now()- timedelta(days=1)).strftime('%Y-%m-%d')
+    today = "2025-12-28"
+    # today = (datetime.now()- timedelta(days=1)).strftime('%Y-%m-%d')
     today_date = datetime.strptime(today, '%Y-%m-%d') - timedelta(hours=12)
     print(f"当前任务日期 (T日): {today}")
 

@@ -8,9 +8,12 @@ import numpy as np
 import os
 
 import joblib
+from dotenv import load_dotenv
+
+load_dotenv("../.env")
 
 HOPSWORKS_PROJECT = "ID2223_finn"
-API_KEY = os.environ.get("HOPSWORKS_API_KEY")
+API_KEY = os.getenv("HOPSWORKS_API_KEY")
 
 FEATURE_GROUP_NAME = 'dhs_shelter_children_features'
 FEATURE_GROUP_VERSION = 1
