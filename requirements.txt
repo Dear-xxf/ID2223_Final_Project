@@ -4,7 +4,7 @@ joblib==1.5.1
 pandas
 plotly==6.5.0
 pytz==2025.2
-scikit_learn==1.8.0
+scikit_learn==1.7.2
 sodapy==2.2.0
 xgboost==3.1.2
 dotenv==0.9.9
