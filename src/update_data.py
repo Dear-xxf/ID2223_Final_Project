@@ -69,8 +69,7 @@ def to_utc(dt):
     return dt.tz_convert('UTC')
 
 def run_daily_update_and_prediction():
-    today = "2025-12-28"
-    # today = (datetime.now()- timedelta(days=1)).strftime('%Y-%m-%d')
+    today = (datetime.now()- timedelta(days=1)).strftime('%Y-%m-%d')
     today_date = datetime.strptime(today, '%Y-%m-%d') - timedelta(hours=12)
     print(f"当前任务日期 (T日): {today}")
 
