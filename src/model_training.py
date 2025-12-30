@@ -5,11 +5,12 @@ import xgboost as xgb
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 import numpy as np
+import os
 
 import joblib
 
 HOPSWORKS_PROJECT = "ID2223_finn"
-API_KEY = "qIowjnpw6LP09gpU.IE7Mx9TexhndcJdBAN6kU3eYgI56pgOaGtIqCZizr5cUrlgLsFNvPs7xklcKqkSx"
+API_KEY = os.environ.get("HOPSWORKS_API_KEY")
 
 FEATURE_GROUP_NAME = 'dhs_shelter_children_features'
 FEATURE_GROUP_VERSION = 1

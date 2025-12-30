@@ -8,9 +8,10 @@ from data_processing import create_combined_features
 
 from sodapy import Socrata
 import pytz
+import os
 
 HOPSWORKS_PROJECT = "ID2223_finn"
-API_KEY = "qIowjnpw6LP09gpU.IE7Mx9TexhndcJdBAN6kU3eYgI56pgOaGtIqCZizr5cUrlgLsFNvPs7xklcKqkSx"
+API_KEY = os.environ.get("HOPSWORKS_API_KEY")
 
 # Hopsworks Feature Group & Model Info
 FEATURE_GROUP_NAME = 'dhs_shelter_children_features'

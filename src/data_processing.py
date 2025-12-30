@@ -3,6 +3,7 @@ import numpy as np
 from typing import List, Tuple, Union
 import hopsworks
 import joblib
+import os
 
 
 def process_dhs_data(file_dhs_path: str, indicators: List[str]) -> pd.DataFrame:
@@ -169,7 +170,7 @@ if __name__ == '__main__':
 
 
     HOPSWORKS_PROJECT = "ID2223_finn"
-    API_KEY = "qIowjnpw6LP09gpU.IE7Mx9TexhndcJdBAN6kU3eYgI56pgOaGtIqCZizr5cUrlgLsFNvPs7xklcKqkSx"
+    API_KEY = os.environ.get("HOPSWORKS_API_KEY")
 
     FEATURE_GROUP_NAME = 'dhs_shelter_children_features'
     FEATURE_GROUP_VERSION = 1

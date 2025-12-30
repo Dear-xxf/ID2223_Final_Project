@@ -4,9 +4,10 @@ import plotly.express as px
 from datetime import datetime
 import time
 import hopsworks
+import os
 
 HOPSWORKS_PROJECT = "ID2223_finn"
-API_KEY = "qIowjnpw6LP09gpU.IE7Mx9TexhndcJdBAN6kU3eYgI56pgOaGtIqCZizr5cUrlgLsFNvPs7xklcKqkSx"
+API_KEY = os.environ.get("HOPSWORKS_API_KEY")
 
 project = hopsworks.login(
         project=HOPSWORKS_PROJECT,
