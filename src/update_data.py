@@ -10,8 +10,9 @@ from sodapy import Socrata
 import pytz
 import os
 from dotenv import load_dotenv
+from pathlib import Path
 
-load_dotenv("../.env")
+# load_dotenv("../.env")
 
 HOPSWORKS_PROJECT = "ID2223_finn"
 API_KEY = os.getenv("HOPSWORKS_API_KEY")
@@ -20,9 +21,9 @@ API_KEY = os.getenv("HOPSWORKS_API_KEY")
 FEATURE_GROUP_NAME = 'dhs_shelter_children_features'
 FEATURE_GROUP_VERSION = 1
 TARGET_COLUMN = 'total_children_in_shelter'
-MODEL_PATH = '../model/xgboost_shelter_model.pkl'
+MODEL_PATH = Path(__file__).resolve().parent.parent / "model" / "xgboost_shelter_model.pkl"
 DATASET_ID = "k46n-sa2m"
-ECON_PIVOT_PATH = "../data/econ_pivot_cache.csv"
+ECON_PIVOT_PATH = Path(__file__).resolve().parent.parent / "data" / "econ_pivot_cache.csv"
 
 DHS_INDICATORS = [
         'date_of_census',
