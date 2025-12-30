@@ -138,7 +138,7 @@ def run_daily_update_and_prediction():
                    'single_adult_women_in_shelter_lag_1', 'families_with_children_in_shelter_lag_1']
     for col in BIGINT_COLS:
         if col in df_combined_new.columns:
-            df_combined_new[col] = pd.to_numeric(df_combined_new[col], errors='coerce').astype(pd.Int64Dtype())
+            df_combined_new[col] = pd.to_numeric(df_combined_new[col], errors='coerce').astype('int64')
     for col in DOUBLE_COLS:
         if col in df_combined_new.columns:
             df_combined_new[col] = df_combined_new[col].astype('float64')
