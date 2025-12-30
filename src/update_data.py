@@ -114,7 +114,7 @@ def run_daily_update_and_prediction():
     df_combined_new['year'] = df_combined_new['date_of_census'].dt.year
     df_combined_new['month'] = df_combined_new['date_of_census'].dt.month
     df_combined_new['day_of_week'] = df_combined_new['date_of_census'].dt.dayofweek
-    df_combined_new['is_weekend'] = (df_combined_new['day_of_week'] >= 5).astype(int)
+    df_combined_new['is_weekend'] = (df_combined_new['day_of_week'] >= 5).astype('int32')
 
     df_combined_new = pd.concat([df_history, df_combined_new], ignore_index=True)
 
